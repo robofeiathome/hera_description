@@ -34,7 +34,8 @@
   <xacro:include filename="$(find hera_description)/urdf/simulation/hokuyo_utm.gazebo.xacro" />
   <xacro:include filename="$(find hera_description)/urdf/simulation/hokuyo_urg.gazebo.xacro" />
   <xacro:include filename="$(find hera_description)/urdf/simulation/asus_xtion.gazebo.xacro" />
-  <xacro:include filename="$(find hera_description)/urdf/simulation/kinect_one.gazebo.xacro" />
+  <!-- <xacro:include filename="$(find hera_description)/urdf/simulation/kinect_one.gazebo.xacro" /> -->
+  <xacro:include filename="$(find hera_description)/urdf/simulation/zed2.gazebo.xacro" />
   <xacro:include filename="$(find hera_description)/urdf/simulation/manipulator.gazebo.xacro" />
   <xacro:include filename="$(find hera_description)/urdf/simulation/control.gazebo.xacro" />
 
@@ -85,10 +86,10 @@
   </xacro:kinect_one> -->
     
   <!-- torso pointcloud front: zed2 --> 
-  <xacro:zed_camera name="zed2" model="zed2" parent="torso_sensor_plat">
-    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  <xacro:zed_camera name="zed" model="zed2" parent="torso_sensor_plat">
+    <origin xyz="0.015 0 0.085" rpy="0 0 0" />
   </xacro:zed_camera>
-  <link name="base_link" />
+
 
   <!--torso suporte-->
   <xacro:create_manip_support_link
@@ -131,15 +132,14 @@
     update_rate="30"/>
 
   <!-- kinect_one -->
-  <xacro:gazebo_kinect_one
+  <!-- <xacro:gazebo_kinect_one
     reference="kinect_one"
-    update_rate="30"/>
+    update_rate="30"/> -->
 
   <!-- zed2 -->
   <xacro:gazebo_zed2
     reference="zed2"
     update_rate="30"/>
-
   <xacro:manip_transmission/>
 
 </robot>

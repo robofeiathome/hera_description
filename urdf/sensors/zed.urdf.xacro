@@ -19,7 +19,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
-  <xacro:include filename="$(find hera_description/urdf/commons.urdf.xacro" />
   <xacro:property name="M_PI"     value="3.1415926535897931" />
 
   <!--
@@ -53,7 +52,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <geometry>
           <mesh filename="package://hera_description/meshes/zed2.stl" />
         </geometry>
-        <material name="${model}_mat" />
+        <material name="black" />
       </visual>
       <collision>
         <geometry>
