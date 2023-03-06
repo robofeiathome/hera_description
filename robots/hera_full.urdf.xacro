@@ -22,10 +22,12 @@
   <xacro:include filename="$(find hera_description)/urdf/actuators/manipulator/manip.urdf.xacro" />
 
   <!-- sensors -->
+  <xacro:property name="camera" value="zed"/> <!-- choose kinect or zed-->
+
   <xacro:include filename="$(find hera_description)/urdf/sensors/hokuyo_utm.urdf.xacro"/>
   <xacro:include filename="$(find hera_description)/urdf/sensors/hokuyo_urg.urdf.xacro"/>
   <xacro:include filename="$(find hera_description)/urdf/sensors/asus_xtion.urdf.xacro"/>
-  <!-- <xacro:include filename="$(find hera_description)/urdf/sensors/kinect_one.urdf.xacro"/> -->
+  <xacro:include filename="$(find hera_description)/urdf/sensors/kinect_one.urdf.xacro"/>
   <xacro:include filename="$(find hera_description)/urdf/sensors/zed.urdf.xacro" />
 
   <!-- simulation -->
@@ -34,7 +36,7 @@
   <xacro:include filename="$(find hera_description)/urdf/simulation/hokuyo_utm.gazebo.xacro" />
   <xacro:include filename="$(find hera_description)/urdf/simulation/hokuyo_urg.gazebo.xacro" />
   <xacro:include filename="$(find hera_description)/urdf/simulation/asus_xtion.gazebo.xacro" />
-  <!-- <xacro:include filename="$(find hera_description)/urdf/simulation/kinect_one.gazebo.xacro" /> -->
+  <xacro:include filename="$(find hera_description)/urdf/simulation/kinect_one.gazebo.xacro" />
   <xacro:include filename="$(find hera_description)/urdf/simulation/zed2.gazebo.xacro" />
   <xacro:include filename="$(find hera_description)/urdf/simulation/manipulator.gazebo.xacro" />
   <xacro:include filename="$(find hera_description)/urdf/simulation/control.gazebo.xacro" />
@@ -78,17 +80,21 @@
     <origin xyz="0.215 0 -0.17" rpy="0 0 0" />
   </xacro:xtion>
 
-  <!-- torso pointcloud front: kinect_one -->
-  <!-- <xacro:kinect_one
-    name="kinect_one"
-    parent="torso_sensor_plat">
-    <origin xyz="0.05 0 0.1" rpy="0 0 0" />
-  </xacro:kinect_one> -->
-    
-  <!-- torso pointcloud front: zed2 --> 
-  <xacro:zed_camera name="zed" model="zed2" parent="torso_sensor_plat">
-    <origin xyz="0.015 0 0.085" rpy="0 0 0" />
-  </xacro:zed_camera>
+  <!-- kinect -->
+  <xacro:if value="${camera == 'kinect'}">
+    <xacro:kinect_one
+      name="kinect_one"
+      parent="torso_sensor_plat">
+      <origin xyz="0.05 0 0.1" rpy="0 0 0" />
+    </xacro:kinect_one>
+  </xacro:if>
+
+  <!-- zed -->
+  <xacro:if value="${camera == 'zed'}">    
+    <xacro:zed_camera name="zed" model="zed2" parent="torso_sensor_plat">
+      <origin xyz="0.015 0 0.085" rpy="0 0 0" />
+    </xacro:zed_camera>
+  </xacro:if>
 
 
   <!--torso suporte-->
