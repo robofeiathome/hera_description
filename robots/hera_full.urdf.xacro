@@ -90,11 +90,11 @@
   </xacro:if>
 
   <!-- zed -->
-  <xacro:if value="${camera == 'zed'}">    
+  <!-- <xacro:if value="${camera == 'zed'}">    
     <xacro:zed_camera name="zed" model="zed2" parent="torso_sensor_plat">
       <origin xyz="0.015 0 0.085" rpy="0 0 0" />
     </xacro:zed_camera>
-  </xacro:if>
+  </xacro:if> -->
 
 
   <!--torso suporte-->
@@ -143,9 +143,9 @@
     update_rate="30"/> -->
 
   <!-- zed2 -->
-  <xacro:gazebo_zed2
+  <!-- <xacro:gazebo_zed2
     reference="zed2"
     update_rate="30"/>
-  <xacro:manip_transmission/>
+  <xacro:manip_transmission/> -->
 
 </robot>
