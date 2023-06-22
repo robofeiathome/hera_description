@@ -75,7 +75,7 @@
 
   <!-- torso pointcloud front: xtion -->
   <xacro:xtion
-    name="xtion"
+    name="xtion_link"
     parent="torso">
     <origin xyz="0.215 0 -0.17" rpy="0 0 0" />
   </xacro:xtion>
