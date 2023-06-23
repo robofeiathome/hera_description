@@ -3,6 +3,19 @@
 
 <xacro:include filename="$(find hera_description)/urdf/actuators/manipulator/manip_prop.urdf.xacro"/>
 
+
+  <xacro:macro name="SimpleTransmission" params="joint">
+    <transmission name="transmission_${joint}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint}">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+        <actuator name="motor_${joint}">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+  </xacro:macro>
 <!--manip_base_link-->
   <xacro:macro name="create_manip_base_link">
     <link name="manip_base_link">
@@ -61,7 +74,9 @@
       <axis xyz="0 0 1" />
       <limit lower="-1.57" upper="1.57" effort="0" velocity="5" />
     </joint>
+    <xacro:SimpleTransmission joint="shoulder_pan_joint"/>
   </xacro:macro>
+
 
 <!--link_2: shoulder_lift_link-->
   <xacro:macro name="create_shoulder_lift_link">
@@ -92,6 +107,7 @@
       <axis xyz="0 1 0" />
       <limit lower="-0.9" upper="3.55" effort="0" velocity="5" />
     </joint>
+    <xacro:SimpleTransmission joint="shoulder_lift_joint"/>
   </xacro:macro>
 
 <!--link_3: elbow_pan_link-->
@@ -121,8 +137,9 @@
       <parent link="shoulder_lift_link" />
       <child link="elbow_pan_link" />
       <axis xyz="1 0 0" />
-      <limit lower="-0.8" upper="0.8" effort="0" velocity="5" />
+      <limit lower="-1.57" upper="1.57" effort="0" velocity="5" />
     </joint>
+    <xacro:SimpleTransmission joint="elbow_pan_joint"/>
   </xacro:macro>
 
 <!--link_4: elbow_lift_link-->
@@ -154,6 +171,7 @@
       <axis xyz="0 -1 0" />
       <limit lower="-3.55" upper="0.9" effort="0" velocity="5" />
     </joint>
+    <xacro:SimpleTransmission joint="elbow_lift_joint"/>
   </xacro:macro>
 
 <!--link_5: wrist_pan_link-->
@@ -183,8 +201,9 @@
       <parent link="elbow_lift_link" />
       <child link="wrist_pan_link" />
       <axis xyz="1 0 0" />
-      <limit lower="-3.14" upper="3.14" effort="0" velocity="5" />
+      <limit lower="-1.57" upper="3.14" effort="0" velocity="5" />
     </joint>
+    <xacro:SimpleTransmission joint="wrist_pan_joint"/>
   </xacro:macro>
 
 <!--link_6: wrist_lift_link-->
@@ -205,7 +224,7 @@
           <mesh filename="package://hera_description/meshes/manip_meshes/wrist_lift_col.STL" />
         </geometry>
         </collision>
-        <xacro:inertial_wrist_lift_link mass="0.482627734525522"/> 
+        <xacro:inertial_wrist_lift_link mass="0.482627734525522"/>
     </link>
 
     <!--joint_6: wrist_lift_joint-->
@@ -216,6 +235,7 @@
       <axis xyz="0 -1 0" />
       <limit lower="-0.64" upper="4" effort="0" velocity="5" />
     </joint>
+    <xacro:SimpleTransmission joint="wrist_lift_joint"/>
   </xacro:macro>
 
 <!--link_7: gripper_right_link-->
@@ -247,6 +267,7 @@
       <axis xyz="0 0 1" />
       <limit lower="-0.6454" upper="1.5600" effort="0" velocity="5" />
     </joint>
+    <xacro:SimpleTransmission joint="gripper_right_joint"/>
   </xacro:macro>
 
 <!--link_7_end: gripper_right_end_link-->
@@ -277,6 +298,7 @@
       <child link="gripper_right_end_link" />
       <axis xyz="0 0 0" />
     </joint>
+
   </xacro:macro>
 
 <!--link_8: gripper_left_link-->
