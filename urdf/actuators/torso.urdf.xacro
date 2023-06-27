@@ -110,13 +110,14 @@
       <parent link="${parent}"/>
       <child link="${name}"/>
     </joint>
+    
     <joint name="joint_${name}_to_${name}_sensor_plat" type="revolute">
       <origin xyz="0.09 0 0.46" rpy="0 0 0"/>
       <parent link="${name}"/>
       <child link="${name}_sensor_plat"/>
       <axis xyz="0 -1 0"/>
       <limit effort="${torso_sensor_plat_effort}" velocity="${torso_sensor_plat_velocity}"
-        lower="-1.5" upper="0.0"/>
+        lower="-2.0" upper="0.3"/>
     </joint>
 
     <transmission name="tran_${name}_sensor_plat">
