@@ -265,7 +265,7 @@
       <parent link="wrist_lift_link" />
       <child  link="gripper_right_link" />
       <axis xyz="0 0 1" />
-      <limit lower="-0.8" upper="0.0" effort="0" velocity="5" />
+      <limit lower="-1.0" upper="0.0" effort="0" velocity="5" />
     </joint>
     <xacro:SimpleTransmission joint="gripper_right_joint"/>
   </xacro:macro>
@@ -328,7 +328,7 @@
       <parent link="wrist_lift_link" />
       <child link="gripper_left_link" />
       <axis xyz="0 0 1" />
-      <limit lower="0.0" upper="0.8" effort="0" velocity="5" />
+      <limit lower="0.0" upper="1.0" effort="0" velocity="5" />
     </joint>
   </xacro:macro>
 
