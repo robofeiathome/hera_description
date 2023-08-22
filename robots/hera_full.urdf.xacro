@@ -75,7 +75,7 @@
 
   <!-- torso pointcloud front: xtion -->
   <xacro:xtion
-    name="xtion_link"
+    name="camera_link"
     parent="torso_sensor_plat">
     <origin xyz="0.02 0 0.05" rpy="0 0 0" />
   </xacro:xtion>
