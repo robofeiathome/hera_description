@@ -75,19 +75,19 @@
 
   <!-- torso pointcloud front: xtion -->
   <xacro:xtion
-    name="xtion_link"
-    parent="torso">
-    <origin xyz="0.215 0 -0.17" rpy="0 0 0" />
+    name="camera_link"
+    parent="torso_sensor_plat">
+    <origin xyz="0.02 0 0.05" rpy="0 0 0" />
   </xacro:xtion>
 
   <!-- kinect -->
-  <xacro:if value="${camera == 'kinect'}">
+  <!--xacro:if value="${camera == 'kinect'}">
     <xacro:kinect_one
       name="kinect_one"
       parent="torso_sensor_plat">
       <origin xyz="0.05 0 0.1" rpy="0 0 0" />
     </xacro:kinect_one>
-  </xacro:if>
+  </xacro:if-->
 
   <!-- zed -->
   <!-- <xacro:if value="${camera == 'zed'}">    
