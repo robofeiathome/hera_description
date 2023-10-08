@@ -60,22 +60,22 @@
     parent="torso"/>
 
   <!-- base laser front -->
-  <xacro:hokuyo_utm
+  <xacro:hokuyo_urg
     name="base_scan_front"
     parent="base">
-    <origin xyz="0.3 0 0.01" rpy="0 0 0"/>
-  </xacro:hokuyo_utm>
+    <origin xyz="0.3 0 0.08" rpy="0 0 0"/>
+  </xacro:hokuyo_urg>
 
   <!-- base laser back -->
-  <xacro:hokuyo_urg
+  <!-- <xacro:hokuyo_urg
     name="base_scan_back"
     parent="base">
-    <origin xyz="-0.3 0 0.01" rpy="0 0 ${M_PI}"/>
-  </xacro:hokuyo_urg>
+    <origin xyz="-0.3 0 0.06" rpy="0 0 ${M_PI}"/>
+  </xacro:hokuyo_urg> -->
 
   <!-- torso pointcloud front: xtion -->
   <xacro:xtion
-    name="camera_link"
+    name="xtion"
     parent="torso_sensor_plat">
     <origin xyz="0.02 0 0.05" rpy="0 0 0" />
   </xacro:xtion>
@@ -106,7 +106,7 @@
     parent="torso"/>
 
   <!-- manip -->
-  <xacro:manipulator/>
+  <!-- <xacro:manipulator/> -->
 
 
 <!-- ####################################################################### -->
