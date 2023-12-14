@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+
+<robot name="hera"
+       xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+    
+    
+    <xacro:include filename="$(find hera_description)/urdf/utils/utils.xacro.xml"/>
+    <xacro:include filename="$(find hera_description)/urdf/base/base.xacro.xml"/>
+    <xacro:include filename="$(find hera_description)/urdf/base/torso.xacro.xml"/>
+    <xacro:include filename="$(find hera_description)/urdf/base/head.xacro.xml"/>
+    <xacro:include filename="$(find hera_description)/urdf/manipulator/manipulator.xacro.xml"/>
+    
+    <!-- Sensors -->
+
+    <xacro:include filename="$(find hera_description)/urdf/sensors/hokuyo_utm.xacro.xml"/>
+    <xacro:include filename="$(find hera_description)/urdf/sensors/hokuyo_urg.xacro.xml"/>
+    <xacro:include filename="$(find hera_description)/urdf/sensors/asus_xtion.xacro.xml"/>
+    
+
+    <!-- Simulation -->
+    <xacro:include filename="$(find hera_description)/urdf/gazebo/asus_xtion.xacro.xml" />
+    <xacro:include filename="$(find hera_description)/urdf/gazebo/colors.xacro.xml" />
+    <xacro:include filename="$(find hera_description)/urdf/gazebo/base.xacro.xml"/>
+    <xacro:include filename="$(find hera_description)/urdf/gazebo/hokuyo_utm.xacro.xml" />
+    <xacro:include filename="$(find hera_description)/urdf/gazebo/hokuyo_urg.xacro.xml" />
+    <xacro:include filename="$(find hera_description)/urdf/gazebo/control.xacro.xml" />
+    <xacro:include filename="$(find hera_description)/urdf/gazebo/manipulator.xacro.xml" />
+    
+    <!-- Robot -->
+    
+    <!-- base -->
+    <xacro:base
+        name="base"/>
+
+    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelBL"/>
+    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelBR"/>
+    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelFL"/>
+    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelFR"/>
+    
+    <!-- torso -->
+    <xacro:torso
+        name="torso"
+        parent="base_link"/>
+
+    <!-- head -->
+    <xacro:head
+        name="head"
+        parent="torso"/>
+
+    <!-- base laser front -->
+    <xacro:hokuyo_urg
+        name="base_scan_front"
+        parent="base_link">
+        <origin xyz="0.3 0 0.0" rpy="0 0 0"/>
+    </xacro:hokuyo_urg>
+    
+    <!-- torso pointcloud front: xtion -->
+    <xacro:xtion
+        name="xtion"
+        parent="torso_sensor_plat">
+        <origin xyz="0.02 0 0.05" rpy="0 0 0" />
+    </xacro:xtion>
+    
+    <!-- manip support-->
+    <xacro:create_manip_support_link
+        parent="torso"/>
+    
+    <!--torso backrest-->
+    <xacro:create_backrest_link
+        parent="torso"/>
+    
+    <!--manipulator-->
+    <xacro:manipulator/>
+    <xacro:generate_manipulator_transmissions/>
+
+    <!-- Gazebo -->
+    
+    <!-- base -->
+    <xacro:gazebo_base
+        reference="base"
+        update_rate="30"/>
+
+    <!-- hokuyo_utm -->
+    <xacro:gazebo_hokuyo_utm
+        reference="base_scan_front"
+        update_rate="30"
+        min_angle="-1.45"
+        max_angle="1.45"/>
+
+    <!-- hokuyo_urg -->
+    <xacro:gazebo_hokuyo_urg
+        reference="base_scan_back"
+        update_rate="30"
+        min_angle="-1.45"
+        max_angle="1.45" />
+
+    <!-- xtion -->
+    <xacro:gazebo_xtion
+        reference="xtion"
+        update_rate="30"/>
+    
+    <xacro:generate_transmission_position joint_name="joint_torso_to_torso_sensor_plat"/>
+    
+</robot>
