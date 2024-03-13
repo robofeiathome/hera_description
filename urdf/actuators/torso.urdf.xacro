@@ -115,9 +115,9 @@
       <origin xyz="0.09 0 0.46" rpy="0 0 0"/>
       <parent link="${name}"/>
       <child link="${name}_sensor_plat"/>
-      <axis xyz="0 -1 0"/>
+      <axis xyz="0 1 0"/>
       <limit effort="${torso_sensor_plat_effort}" velocity="${torso_sensor_plat_velocity}"
-        lower="-2.0" upper="0.3"/>
+        lower="0.0" upper="1.8"/>
     </joint>
 
     <transmission name="tran_${name}_sensor_plat">
