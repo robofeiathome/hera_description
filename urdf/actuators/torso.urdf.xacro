@@ -36,46 +36,11 @@
 
     <!-- torso -->
     <link name="${name}">
-      <xacro:create_box
-        m="${big_box_mass}"
-        x="${big_box_size_x}"
-        y="${big_box_size_y}"
-        z="${big_box_size_z}">
-        <origin xyz="-0.1 0 -0.225" rpy="0 0 0"/>
-      </xacro:create_box>
-      <xacro:create_box
-        m="${small_box_mass}"
-        x="${small_box_size_x}"
-        y="${small_box_size_y}"
-        z="${small_box_size_z}">
-        <origin xyz="0.15 0 -0.35" rpy="0 0 0"/>
-      </xacro:create_box>
-      <xacro:create_box
-        m="${head_plat_mass}"
-        x="${head_plat_size_x}"
-        y="${head_plat_size_y}"
-        z="${head_plat_size_z}">
-        <origin xyz="-0.06 0 0.475" rpy="0 0 0"/>
-      </xacro:create_box>
-      <xacro:create_box
-        m="${pole_mass}"
-        x="${pole_size_x}"
-        y="${pole_size_y}"
-        z="${pole_size_z}">
-        <origin xyz="-0.06 -0.18 0" rpy="0 0 0"/>
-      </xacro:create_box>
-      <xacro:create_box
-        m="${pole_mass}"
-        x="${pole_size_x}"
-        y="${pole_size_y}"
-        z="${pole_size_z}">
-        <origin xyz="-0.06 0.18 0" rpy="0 0 0"/>
-      </xacro:create_box>
       <visual>
-        <origin xyz="0 0 -0.5" rpy="0 0 0"/>
+        <origin xyz="0 0 -0.5" rpy="1.57 0 0"/>
         <material name="dark_grey"/>
         <geometry>
-          <mesh filename="package://hera_description/meshes/torso.stl"/>
+          <mesh filename="package://hera_description/meshes/torso.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </visual>
       <collision>
@@ -87,20 +52,24 @@
       </collision>
     </link>
 
-    <!-- sensor plat -->
-    <link name="${name}_sensor_plat">
-      <xacro:create_box
-        m="${sensor_plat_mass}"
-        x="${sensor_plat_size_x}"
-        y="${sensor_plat_size_y}"
-        z="${sensor_plat_size_z}">
-        <origin xyz="0 0 0.05" rpy="0 0 0"/>
-      </xacro:create_box>
+    <!-- head_pan -->
+    <link name="camera_pan">
       <visual>
-        <origin xyz="0.2 0 -0.2" rpy="0 0 0"/>
-        <material name="dark_grey"/>
+        <origin xyz="-0.035 -0.02 -0.047" rpy="3.14 1.57 3.14"/>
+        <material name="white"/>
         <geometry>
-          <mesh filename="package://hera_description/meshes/torso_sensor_plat.stl"/>
+          <mesh filename="package://hera_description/meshes/camera_meshes/Intermediario.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <!-- head_lift -->
+    <link name="camera_lift">
+      <visual>
+        <origin xyz="-0.125 0.02 -0.507" rpy="0 -1.54 -3.14"/>
+        <material name="white"/>
+        <geometry>
+          <mesh filename="package://hera_description/meshes/camera_meshes/Inferior.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </visual>
     </link>
@@ -111,21 +80,30 @@
       <child link="${name}"/>
     </joint>
     
-    <joint name="joint_${name}_to_${name}_sensor_plat" type="revolute">
+    <joint name="joint_camera_pan" type="revolute">
       <origin xyz="0.09 0 0.46" rpy="0 0 0"/>
       <parent link="${name}"/>
-      <child link="${name}_sensor_plat"/>
+      <child link="camera_pan"/>
       <axis xyz="0 1 0"/>
       <limit effort="${torso_sensor_plat_effort}" velocity="${torso_sensor_plat_velocity}"
-        lower="0.0" upper="1.8"/>
+        lower="-0.3" upper="1.5"/>
     </joint>
 
-    <transmission name="tran_${name}_sensor_plat">
+  <joint name="joint_camera_lift" type="revolute">
+      <origin xyz="0.09 0 0.46" rpy="0 0 0"/>
+      <parent link="camera_pan"/>
+      <child link="camera_lift"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="${torso_sensor_plat_effort}" velocity="${torso_sensor_plat_velocity}"
+        lower="-0.3" upper="1.5"/>
+    </joint>
+
+    <transmission name="tran_camera_pan">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="joint_${name}_to_${name}_sensor_plat">
+      <joint name="joint_${name}_to_camera_pan">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
-      <actuator name="motor_${name}_sensor_plat">
+      <actuator name="motor_camera_pan">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>

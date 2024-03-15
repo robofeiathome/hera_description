@@ -22,7 +22,7 @@
   <xacro:include filename="$(find hera_description)/urdf/actuators/manipulator/manip.urdf.xacro" />
 
   <!-- sensors -->
-  <xacro:property name="camera" value="zed"/> <!-- choose kinect or zed-->
+  // <xacro:property name="camera" value="zed"/> <!-- choose kinect or zed-->
 
   <xacro:include filename="$(find hera_description)/urdf/sensors/hokuyo_utm.urdf.xacro"/>
   <xacro:include filename="$(find hera_description)/urdf/sensors/hokuyo_urg.urdf.xacro"/>
@@ -73,13 +73,6 @@
     <origin xyz="-0.3 0 0.01" rpy="0 0 ${M_PI}"/>
   </xacro:hokuyo_urg>
 
-  <!-- torso pointcloud front: xtion -->
-  <xacro:xtion
-    name="camera_link"
-    parent="torso_sensor_plat">
-    <origin xyz="0.02 0 0.05" rpy="0 0 0" />
-  </xacro:xtion>
-
   <!-- kinect -->
   <!--xacro:if value="${camera == 'kinect'}">
     <xacro:kinect_one
@@ -95,7 +88,6 @@
       <origin xyz="0.015 0 0.085" rpy="0 0 0" />
     </xacro:zed_camera>
   </xacro:if> -->
-
 
   <!--torso suporte-->
   <xacro:create_manip_support_link
