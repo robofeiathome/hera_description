@@ -32,7 +32,7 @@
             </xacro:create_sphere>
         </link>
         
-        <joint name="joint_${parent}_to_${name}" type="continuous">
+        <joint name="joint_${parent}_to_${name}" type="fixed">
             <xacro:insert_block name="origin"/>
             <parent link="${parent}"/>
             <child link="${name}"/>
@@ -44,14 +44,14 @@
     <xacro:macro name="base" params="name">
         <!-- Footprint -->
         <link name='${name}_footprint'/>
-        <joint name="joint_${name}_footprint_to_${name}_link" type="fixed">
+        <joint name="joint_${name}_footprint_to_${name}" type="fixed">
             <origin xyz="0 0 ${wheel_radius}"/>
             <parent link="${name}_footprint"/>
-            <child link="${name}_link"/>
+            <child link="${name}"/>
         </joint>
         
-        <!-- Base_link -->
-        <link name="${name}_link">
+        <!-- Base -->
+        <link name="${name}">
             <xacro:create_box m="${base_mass}" x="${base_size_x}" y="${base_size_y}" z="${base_size_z}">
                 <origin xyz="0 0 0" rpy="0 0 0"/>
             </xacro:create_box>
@@ -64,7 +64,7 @@
         </link>
         
         <!-- Wheels -->
-        <xacro:wheel name="${name}_wheelFR" parent="${name}_link">
+        <xacro:wheel name="${name}_wheelFR" parent="${name}">
             <origin xyz="${0.4*base_size_x} -${base_size_y/2+wheel_length/2+wheel_gap} 0.0" rpy="0 0 0" />
             <visual>
                 <origin xyz="0 -0.045 0" rpy="0 0 -${M_PI/2}"/>
@@ -75,7 +75,7 @@
             </visual>
         </xacro:wheel>
         
-        <xacro:wheel name="${name}_wheelFL" parent="${name}_link">
+        <xacro:wheel name="${name}_wheelFL" parent="${name}">
             <origin xyz="${0.4*base_size_x} ${base_size_y/2+wheel_length/2+wheel_gap} 0.0" rpy="0 0 0" />
             <visual>
                 <origin xyz="0 0.045 0" rpy="0 0 ${M_PI/2}"/>
@@ -86,7 +86,7 @@
             </visual>
         </xacro:wheel>
         
-        <xacro:wheel name="${name}_wheelBR" parent="${name}_link">
+        <xacro:wheel name="${name}_wheelBR" parent="${name}">
             <origin xyz="-${0.4*base_size_x} -${base_size_y/2+wheel_length/2+wheel_gap} 0.0" rpy="0 0 0"/>
             <visual>
                 <origin xyz="0 -0.045 0" rpy="0 0 -${M_PI/2}"/>
@@ -97,7 +97,7 @@
             </visual>
         </xacro:wheel>
 
-        <xacro:wheel name="${name}_wheelBL" parent="${name}_link">
+        <xacro:wheel name="${name}_wheelBL" parent="${name}">
             <origin xyz="-${0.4*base_size_x} ${base_size_y/2+wheel_length/2+wheel_gap} 0.0" rpy="0 0 0"/>
             <visual>
                 <origin xyz="0 0.045 0" rpy="0 0 ${M_PI/2}"/>

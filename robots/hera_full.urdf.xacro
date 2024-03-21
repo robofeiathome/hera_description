@@ -34,16 +34,11 @@
     <!-- base -->
     <xacro:base
         name="base"/>
-
-    <!-- <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelBL"/>
-    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelBR"/>
-    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelFL"/>
-    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelFR"/> -->
     
     <!-- torso -->
     <xacro:torso
         name="torso"
-        parent="base_link"/>
+        parent="base"/>
 
     <!-- head -->
     <xacro:head
@@ -53,7 +48,7 @@
     <!-- base laser front -->
     <xacro:hokuyo_urg
         name="base_scan_front"
-        parent="base_link">
+        parent="base">
         <origin xyz="0.3 0 0.0" rpy="0 0 0"/>
     </xacro:hokuyo_urg>
     

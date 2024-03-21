@@ -34,11 +34,6 @@
     <!-- base -->
     <xacro:base
         name="base"/>
-
-    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelBL"/>
-    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelBR"/>
-    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelFL"/>
-    <xacro:generate_transmission_position joint_name="joint_base_link_to_base_wheelFR"/>
     
     <!-- torso -->
     <xacro:torso
