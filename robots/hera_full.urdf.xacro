@@ -5,7 +5,7 @@
        xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
        xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
        xmlns:xacro="http://ros.org/wiki/xacro">
-    
+    <xacro:arg name="use_nominal_extrinsics" default="false" />
     
     <xacro:include filename="$(find hera_description)/urdf/utils/utils.xacro.xml"/>
     <xacro:include filename="$(find hera_description)/urdf/base/base.xacro.xml"/>
@@ -28,6 +28,8 @@
     <xacro:include filename="$(find hera_description)/urdf/gazebo/hokuyo_urg.xacro.xml" />
     <xacro:include filename="$(find hera_description)/urdf/gazebo/control.xacro.xml" />
     <xacro:include filename="$(find hera_description)/urdf/gazebo/manipulator.xacro.xml" />
+
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435i.urdf.xacro"/>
     
     <!-- Robot -->
     
@@ -53,11 +55,6 @@
     </xacro:hokuyo_urg>
     
     <!-- torso pointcloud front: xtion -->
-    <xacro:xtion
-        name="xtion"
-        parent="torso_sensor_plat">
-        <origin xyz="0.02 0 0.05" rpy="0 0 0" />
-    </xacro:xtion>
     
     <!-- manip support-->
     <xacro:create_manip_support_link
@@ -67,6 +64,10 @@
     <xacro:create_backrest_link
         parent="torso"/>
     
+    <xacro:sensor_d435i parent="torso_pan_mechanism_link" use_nominal_extrinsics="$(arg use_nominal_extrinsics)">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:sensor_d435i>
+
     <!--manipulator-->
     <xacro:manipulator/>
     <xacro:generate_manipulator_transmissions/>
@@ -92,11 +93,7 @@
         min_angle="-1.45"
         max_angle="1.45" />
 
-    <!-- xtion -->
-    <xacro:gazebo_xtion
-        reference="xtion"
-        update_rate="30"/>
-    
-    <xacro:generate_transmission_position joint_name="joint_torso_to_torso_sensor_plat"/>
+    <xacro:generate_transmission_position joint_name="joint_camera_pan"/>
+    <xacro:generate_transmission_position joint_name="joint_camera_tilt"/>
     
 </robot>
