@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="manipulator_transmissions">
+
+    <xacro:macro name="generate_transmission_position" params="joint_name">
+        <transmission name="${joint_name}_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            
+            <joint name="${joint_name}">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+
+            <actuator name="${joint_name}_actuator">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+
+        </transmission>
+    </xacro:macro>
+
+    <xacro:macro name="generate_transmission_effort" params="joint_name">
+        <transmission name="${joint_name}_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            
+            <joint name="${joint_name}">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+
+            <actuator name="${joint_name}_actuator">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+
+        </transmission>
+    </xacro:macro>
+
+    <xacro:macro name="generate_manipulator_transmissions">
+        <xacro:generate_transmission_position joint_name="shoulder_pan_joint"/>
+        <xacro:generate_transmission_position joint_name="shoulder_lift_joint"/>
+        <xacro:generate_transmission_position joint_name="elbow_pan_joint"/>
+        <xacro:generate_transmission_position joint_name="elbow_lift_joint"/>
+        <xacro:generate_transmission_position joint_name="wrist_pan_joint"/>
+        <xacro:generate_transmission_position joint_name="wrist_lift_joint"/>
+        <xacro:generate_transmission_effort joint_name="gripper_right_joint"/>
+        <xacro:generate_transmission_effort joint_name="gripper_left_joint"/>
+    </xacro:macro>
+
+    
+</robot>
