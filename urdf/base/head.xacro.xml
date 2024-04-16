@@ -4,7 +4,7 @@
        xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
        xmlns:xacro="http://ros.org/wiki/xacro">
 
-    <xacro:property name="head_base_mass"      value="0.01"/>
+    <xacro:property name="head_base_mass"      value="2.0"/>
     <xacro:property name="head_base_radius"    value="${pole_size_x/2}"/>
     <xacro:property name="head_base_length"    value="0.06"/>
 

@@ -29,7 +29,7 @@
     <xacro:include filename="$(find hera_description)/urdf/gazebo/control.xacro.xml" />
     <xacro:include filename="$(find hera_description)/urdf/gazebo/manipulator.xacro.xml" />
 
-    <xacro:include filename="$(find realsense2_description)/urdf/_d435i.urdf.xacro"/>
+    <xacro:include filename="$(find hera_description)/urdf/sensors/realsense_d435.urdf.xacro"/>
     
     <!-- Robot -->
     
@@ -64,9 +64,9 @@
     <xacro:create_backrest_link
         parent="torso"/>
     
-    <xacro:sensor_d435i parent="torso_pan_mechanism_link" use_nominal_extrinsics="$(arg use_nominal_extrinsics)">
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-    </xacro:sensor_d435i>
+    <xacro:sensor_d435 parent="torso_pan_mechanism_link">
+        <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    </xacro:sensor_d435>
 
     <!--manipulator-->
     <xacro:manipulator/>
