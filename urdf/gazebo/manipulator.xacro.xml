@@ -38,8 +38,8 @@
         <xacro:generate_transmission_position joint_name="elbow_lift_joint"/>
         <xacro:generate_transmission_position joint_name="wrist_pan_joint"/>
         <xacro:generate_transmission_position joint_name="wrist_lift_joint"/>
-        <xacro:generate_transmission_effort joint_name="gripper_right_joint"/>
-        <xacro:generate_transmission_effort joint_name="gripper_left_joint"/>
+        <xacro:generate_transmission_position joint_name="gripper_right_joint"/>
+        <xacro:generate_transmission_position joint_name="gripper_left_joint"/>
     </xacro:macro>
 
     
