@@ -28,6 +28,7 @@
     <xacro:include filename="$(find hera_description)/urdf/gazebo/hokuyo_urg.xacro.xml" />
     <xacro:include filename="$(find hera_description)/urdf/gazebo/control.xacro.xml" />
     <xacro:include filename="$(find hera_description)/urdf/gazebo/manipulator.xacro.xml" />
+    <xacro:include filename="$(find hera_description)/urdf/gazebo/imu.xacro.xml" />
 
     <xacro:include filename="$(find hera_description)/urdf/sensors/realsense_d435.urdf.xacro"/>
     
@@ -93,7 +94,11 @@
         min_angle="-1.45"
         max_angle="1.45" />
 
+    
+
     <xacro:generate_transmission_position joint_name="joint_camera_pan"/>
     <xacro:generate_transmission_position joint_name="joint_camera_tilt"/>
+
+    <xacro:imu />
     
 </robot>
