@@ -43,10 +43,10 @@
     
     <xacro:macro name="base" params="name">
         <!-- Footprint -->
-        <link name='${name}_footprint'/>
+        <link name='base_footprint'/>
         <joint name="joint_${name}_footprint_to_${name}" type="fixed">
             <origin xyz="0 0 ${wheel_radius}"/>
-            <parent link="${name}_footprint"/>
+            <parent link="base_footprint"/>
             <child link="${name}"/>
         </joint>
         

@@ -12,7 +12,7 @@
                 <odometryFrame>odom</odometryFrame>
                 <odometryRate>${update_rate}</odometryRate>
                 <cmdTimeout>-1</cmdTimeout>
-                <robotBaseFrame>${reference}_footprint</robotBaseFrame>
+                <robotBaseFrame>base_footprint</robotBaseFrame>
             </plugin>
         </gazebo>
 

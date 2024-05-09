@@ -35,12 +35,12 @@
     
     <!-- base -->
     <xacro:base
-        name="base"/>
+        name="base_link"/>
     
     <!-- torso -->
     <xacro:torso
         name="torso"
-        parent="base"/>
+        parent="base_link"/>
 
     <!-- head -->
     <xacro:head
@@ -50,7 +50,7 @@
     <!-- base laser front -->
     <xacro:hokuyo_urg
         name="base_scan_front"
-        parent="base">
+        parent="base_link">
         <origin xyz="0.3 0 0.0" rpy="0 0 0"/>
     </xacro:hokuyo_urg>
     
@@ -76,7 +76,7 @@
     
     <!-- base -->
     <xacro:gazebo_base
-        reference="base"
+        reference="base_link"
         update_rate="30"/>
 
     <!-- hokuyo_utm -->

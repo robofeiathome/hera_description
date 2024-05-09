@@ -33,7 +33,7 @@
     
     <!-- base -->
     <xacro:base
-        name="base"/>
+        name="base_link"/>
     
     <!-- torso -->
     <xacro:torso
@@ -75,7 +75,7 @@
     
     <!-- base -->
     <xacro:gazebo_base
-        reference="base"
+        reference="base_link"
         update_rate="30"/>
 
     <!-- hokuyo_utm -->
