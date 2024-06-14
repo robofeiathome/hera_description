@@ -3,9 +3,9 @@
 
     <!-- Properties -->
     <xacro:property name="big_box_mass"      value="1.00"/>
-    <xacro:property name="big_box_size_x"    value="0.30"/>
-    <xacro:property name="big_box_size_y"    value="${base_size_y}"/>
-    <xacro:property name="big_box_size_z"    value="0.55"/>
+    <xacro:property name="big_box_size_x"    value="0.324"/>
+    <xacro:property name="big_box_size_y"    value="0.501"/>
+    <xacro:property name="big_box_size_z"    value="0.406"/>
 
     <xacro:property name="small_box_mass"    value="0.50"/>
     <xacro:property name="small_box_size_x"  value="0.20"/>
@@ -49,16 +49,16 @@
             x="${big_box_size_x}"
             y="${big_box_size_y}"
             z="${big_box_size_z}">
-            <origin xyz="-0.1 0 -0.225" rpy="0 0 0"/>
+            <origin xyz="-${base_size_x / 2} -${base_size_y / 2} -0.5" rpy="1.57 0 0"/>
         </xacro:create_box>
         
         <!-- Small Auxiliary Box on the Torso -->
         <xacro:create_box
             m="${small_box_mass}"
-            x="${small_box_size_x}"
-            y="${small_box_size_y}"
-            z="${small_box_size_z}">
-            <origin xyz="0.15 0 -0.35" rpy="0 0 0"/>
+            x="${big_box_size_x}"
+            y="${big_box_size_y}"
+            z="${big_box_size_z}">
+            <origin xyz="-${base_size_x / 2} -${base_size_y / 2} -0.54" rpy="1.57 0 0"/>
         </xacro:create_box>
         
         <!-- Head Platform on the Torso -->
@@ -90,19 +90,36 @@
         
         <!-- Torso Visual and Collision Representations -->
         <visual>
-            <origin xyz="0 0 -0.5" rpy="1.57 0 0"/>
+            <origin xyz="-${base_size_x / 2} -${base_size_y / 2} -0.5" rpy="1.57 0 0"/>
             <material name="dark_grey"/>
             <geometry>
-                <mesh filename="package://hera_description/meshes/base/torso.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://hera_description/meshes/base/torso_box.stl" scale="0.001 0.001 0.001"/>
             </geometry>
         </visual>
         <collision>
-            <origin xyz="0 0 -0.5" rpy="1.57 0 0"/>
+            <origin xyz="-${base_size_x / 2} -${base_size_y / 2} -0.5" rpy="1.57 0 0"/>
             <material name="dark_grey"/>
             <geometry>
-                <mesh filename="package://hera_description/meshes/base/torso.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://hera_description/meshes/base/torso_box.stl" scale="0.001 0.001 0.001"/>
             </geometry>
         </collision>
+
+        <visual>
+            <origin xyz="-${base_size_x / 2} -${base_size_y / 2} -0.54" rpy="1.57 0 0"/>
+            <material name="dark_grey"/>
+            <geometry>
+                <mesh filename="package://hera_description/meshes/base/torso_triangle.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="-${base_size_x / 2} -${base_size_y / 2} -0.54" rpy="1.57 0 0"/>
+            <material name="dark_grey"/>
+            <geometry>
+                <mesh filename="package://hera_description/meshes/base/torso_triangle.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+ 
+
     </link>
 
     <!-- Sensor Platform -->
