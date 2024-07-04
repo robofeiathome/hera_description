@@ -192,7 +192,7 @@
         <parent link="${name}_sensor_platform"/>
         <child link="${name}_connection_rod"/>
         <axis xyz="0 -1 0"/>
-        <limit effort="${torso_sensor_plat_effort}" velocity="${torso_sensor_plat_velocity}" lower="-2.0" upper="0.3"/>
+        <limit effort="${torso_sensor_plat_effort}" velocity="${torso_sensor_plat_velocity}" lower="-2.0" upper="0.5"/>
     </joint>
 
     <!-- Joint Fixo que Conecta a Haste ao Pan Mechanism -->
